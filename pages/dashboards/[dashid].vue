@@ -1,12 +1,16 @@
 <template>
     <div>
-        <h1>Dashboard {{ dashid }}</h1>
-        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Perspiciatis iusto vero rerum minus, nam at accusantium saepe. Consequuntur, tempora excepturi ipsum ipsa inventore autem quos error, minus aliquam nostrum odio.</p>
+        <h1>Dashboard {{ dashboard.title }}</h1>
+        <p class="text-indigo-900">Price: ${{ dashboard.price }}</p>
+        <p>{{ dashboard.description }}</p>
     </div>
 </template>
 
 <script setup>
     const { dashid } = useRoute().params;
+
+    const uri = 'https://fakestoreapi.com/products/' + dashid;
+    const { data: dashboard } = await useFetch(uri);
 
     definePageMeta({
         layout: 'footer-navbar'

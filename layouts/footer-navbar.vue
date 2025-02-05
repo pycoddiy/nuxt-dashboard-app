@@ -5,7 +5,6 @@
     <footer class="m-4 shadow-lg bg-blue-50 rounded-lg">
 
         <nav class="container p-2 flex justify-between">
-            <NuxtLink to="/"><img class="rounded-full w-10" src="assets/images/logo.png" alt="Dashboard logo"></NuxtLink>
             <ul class="flex gap-4">
                 <li><NuxtLink to="/" class="btn">Home</NuxtLink></li>
                 <li><NuxtLink to="/about" class="btn">About</NuxtLink></li>

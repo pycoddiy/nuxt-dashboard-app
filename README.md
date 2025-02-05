@@ -169,3 +169,51 @@ template>
 <li><NuxtLink to="/" class="btn">Home</NuxtLink></li>
 ```
 
+## Adding fakestoreapi.com to dynamically display dashboard content
+23. Add the following to the script in `pages/dashboards/index.vue`:
+
+```ts
+    const { data: dashboards } = await useFetch('https://fakestoreapi.com/products')
+```
+
+24. HTML part should be edited like this:
+
+```html
+<template>
+    <div>
+        <h1>Dashboards</h1>
+        <div class="grid grid-cols-4 gap-5">
+            <div v-for="d in dashboards" class="container bg-indigo-50 shadow-lg h-20 p-1">
+                <NuxtLink :to="`/dashboards/${d.id}`">{{ d.title }}</NuxtLink>
+            </div>
+        </div>
+    </div>
+</template>
+```
+
+25. Now let's edit [dashid].vue file:
+
+```ts
+<script setup>
+    const { dashid } = useRoute().params;
+
+    const uri = 'https://fakestoreapi.com/products/' + dashid;
+    const { data: dashboard } = await useFetch(uri);
+
+    definePageMeta({
+        layout: 'footer-navbar'
+    })
+</script>
+```
+
+and HTML part:
+
+```html
+<template>
+    <div>
+        <h1>Dashboard {{ dashboard.title }}</h1>
+        <p class="text-indigo-900">Price: ${{ dashboard.price }}</p>
+        <p>{{ dashboard.description }}</p>
+    </div>
+</template>
+```

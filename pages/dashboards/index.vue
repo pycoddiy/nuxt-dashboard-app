@@ -1,7 +1,11 @@
 <template>
     <div>
         <h1>Dashboards</h1>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus tempore tenetur incidunt similique dolor, debitis explicabo labore quaerat praesentium? Vel odio laboriosam itaque, quae id reiciendis hic ipsa eligendi harum.</p>
+        <div class="grid grid-cols-4 gap-5">
+            <div v-for="d in dashboards" class="container bg-indigo-50 shadow-lg h-20 p-1">
+                <NuxtLink :to="`/dashboards/${d.id}`">{{ d.title }}</NuxtLink>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -9,6 +13,8 @@
     definePageMeta({
         layout: 'footer-navbar'
     })
+
+    const { data:dashboards } = await useFetch('https://fakestoreapi.com/products')
 </script>
 
 <style scoped>
