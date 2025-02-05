@@ -1,4 +1,8 @@
 <template>
+    <Head>
+        <Title>Nuxt Dashboard App | {{ dashboard.title }}</Title>
+        <Meta name="description" :content="dashboard.description" />
+    </Head>
     <div>
         <DashboardDetails :dashboard="dashboard"/>
     </div>

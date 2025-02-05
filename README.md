@@ -362,3 +362,54 @@ and HTML part:
     const handleClearError = () => clearError({ redirect: '/' })
 ```
 
+## Working with metadata, adding Google icon to a button
+35. Add the following piece into `nuxt.config.ts` file:
+
+```ts
+app: {
+    head: {
+      title: 'Nuxt Dashboard App',
+      meta: [
+        { charset: 'utf-8' },
+        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+        { hid: 'description', name: 'description', content: 'Sandbox for designing  proper UTDesign Monitoring Dashboard application' },
+      ],
+      link: [
+        { rel:'stylesheet', href: 'https://fonts.googleapis.com/icon?family=Material+Icons' }
+      ],
+    },
+  }
+```
+
+36. Customize the tiltles for `about.vue` and `dashboards/index.vue` by adding a script similar to the following:
+
+```ts
+<script setup>
+    useHead({
+        title: 'Nuxt Dashboar App | About'
+    });
+</script>
+```
+
+37. Customize HTML part in `[dashid].vue` to add dashboard-specific title and description:
+
+```html
+<template>
+    <Head>
+        <Title>Nuxt Dashboard App | {{ dashboard.title }}</Title>
+        <Meta name="description" :content="dashboard.description" />
+    </Head>
+    <div>
+        <DashboardDetails :dashboard="dashboard"/>
+    </div>
+</template>
+```
+38. In `DashboardDetails.vue` add **Add To Cart** button with Google icon:
+
+```html
+...
+<button class="btn flex">
+    <span class="material-icons mr-2">add_shopping_cart</span>
+    <span>Add to Cart</span>
+</button>
+```

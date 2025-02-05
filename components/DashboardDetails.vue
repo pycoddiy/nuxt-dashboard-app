@@ -9,6 +9,10 @@
                 <p class="text-xl my-7">Price: $ {{ dashboard.price }}</p>
                 <h3 class="font-bold border-b-2 mb-4 pb-2">Dashboard Description</h3>
                 <p class="mb-7">{{ dashboard.description }}</p>
+                <button class="btn flex">
+                    <span class="material-icons mr-2">add_shopping_cart</span>
+                    <span>Add to Cart</span>
+                </button>
             </div>
         </div>
     </div>
@@ -16,6 +20,7 @@
 
 <script setup>
     const { dashboard } = defineProps(['dashboard'])
+
 </script>
 
 <style scoped>

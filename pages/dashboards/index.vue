@@ -17,6 +17,10 @@ import DashboardCard from '~/components/DashboardCard.vue';
     })
 
     const { data:dashboards } = await useFetch('https://fakestoreapi.com/products')
+
+    useHead({
+        title: 'Nuxt Dashboar App | Dashboards'
+    });
 </script>
 
 <style scoped>

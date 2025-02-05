@@ -6,7 +6,9 @@
 </template>
 
 <script setup>
-
+    useHead({
+        title: 'Nuxt Dashboar App | About'
+    });
 </script>
 
 <style scoped>
