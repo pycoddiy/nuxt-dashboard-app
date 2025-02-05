@@ -305,3 +305,60 @@ and HTML part:
     </div>
 </template>
 ```
+
+## Custom error pages
+31. Add `error.vue` file in the root and initialize the content:
+
+```html
+<template>
+    <div class="mt-7 max-w-sm mx-auto text-center card">
+        <p class="mt-7 text-7xl font-bold">{{ error.statusCode }}</p>
+        <p class="mt-7 text-6xl">Oooops</p>
+        <p class="mt-7">{{ error.message }}</p>
+    </div>
+</template>
+
+<script setup>
+    defineProps(['error'])
+</script>
+```
+
+32. Handle errors if an item cannot be fetched. In the file `[dashid].vue` make the following changes to the scripting section:
+
+```ts
+<script setup>
+    const { dashid } = useRoute().params;
+
+    const uri = 'https://fakestoreapi.com/products/' + dashid;
+    const { data: dashboard } = await useFetch(uri, { key: dashid });
+
+    if (!dashboard.value) {
+        throw createError({ statusCode: 404, statusMessage: 'Dashboard not found' });
+    }
+
+    definePageMeta({
+        layout: 'footer-navbar'
+    })
+</script>
+```
+
+33. Add custom button in `error.vue`, which will route a user to the Home page:
+
+```html
+<template>
+    <div class="mt-7 max-w-sm mx-auto text-center card">
+        <p class="mt-7 text-7xl font-bold">{{ error.statusCode }}</p>
+        <p class="mt-7 text-6xl">Oooops</p>
+        <p class="mt-7">{{ error.message }}</p>
+        <button class="btn my-7" @click="handleClearError">Back to Home</button>
+    </div>
+</template>
+```
+
+34. Add script with the function `handleClearError`, which clears the error:
+
+```ts
+    ...
+    const handleClearError = () => clearError({ redirect: '/' })
+```
+

@@ -10,6 +10,10 @@
     const uri = 'https://fakestoreapi.com/products/' + dashid;
     const { data: dashboard } = await useFetch(uri, { key: dashid });
 
+    if (!dashboard.value) {
+        throw createError({ statusCode: 404, statusMessage: 'Dashboard not found' });
+    }
+
     definePageMeta({
         layout: 'footer-navbar'
     })
