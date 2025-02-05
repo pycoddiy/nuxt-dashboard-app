@@ -21,4 +21,8 @@
     .btn {
         @apply bg-indigo-500 text-indigo-100 px-3 py-2 rounded-md text-sm transition-colors duration-150 hover:bg-indigo-800 focus:outline
     }
+
+    .card {
+        @apply p-3 rounded-md bg-white shadow-md h-full;
+    }
 }

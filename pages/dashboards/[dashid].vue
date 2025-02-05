@@ -1,8 +1,6 @@
 <template>
     <div>
-        <h1>Dashboard {{ dashboard.title }}</h1>
-        <p class="text-indigo-900">Price: ${{ dashboard.price }}</p>
-        <p>{{ dashboard.description }}</p>
+        <DashboardDetails :dashboard="dashboard"/>
     </div>
 </template>
 

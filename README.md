@@ -217,3 +217,91 @@ and HTML part:
     </div>
 </template>
 ```
+
+## Nuxt components
+26. Create new directory `components` under the root. Create new file `DashboardCard.vue`. Type `vbase-3-setup` to initialize the content on the new file. Edit the card:
+
+```html
+<template>
+    <div class="card text-center">
+        <img :src="dashboard.image" alt="Dashboard thumb" class="thumb">
+        <p class="font-bold text-grey-500 m-4 truncate">{{ dashboard.title }}</p>
+        <NuxtLink :to="`/dashboards/${dashboard.id}`">
+            <p class="btn my-4">Dashboard Details</p>
+        </NuxtLink>
+    </div>
+</template>
+
+<script setup>
+    const { dashboard } = defineProps(['dashboard'])
+</script>
+
+<style scoped>
+    .thumb {
+        max-height: 120px;
+        max-width: 70%;
+        margin: 0 auto;
+    }
+</style>
+```
+
+27. In `tailwind.css` add new style  `card` to components layer:
+```css
+    .card {
+        @apply p-3 rounded-md bg-white shadow-md h-full;
+    }
+```
+
+28. Rewrite `dashboards/index.vue` as follows:
+
+```html
+<template>
+    <div>
+        <h1>Dashboards</h1>
+        <div class="grid grid-cols-4 gap-5">
+            <div v-for="d in dashboards">
+                <DashboardCard :dashboard="d" />
+            </div>
+        </div>
+    </div>
+</template>
+```
+
+29. Add new file `DashboardDetails.vue` to components;
+```html
+<template>
+    <div class="card">
+        <div class="grid grid-cols-2 gap-10">
+            <div class="p-10">
+                <img :src="dashboard.image" alt="Dashboard image" class="mx-auto my-7">
+            </div>
+            <div class="p-7 ">
+                <h2 class="text-4xl my-7">{{ dashboard.title }}</h2>
+                <p class="text-xl my-7">Price: $ {{ dashboard.price }}</p>
+                <h3 class="font-bold border-b-2 mb-4 pb-2">Dashboard Description</h3>
+                <p class="mb-7">{{ dashboard.description }}</p>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script setup>
+    const { dashboard } = defineProps(['dashboard'])
+</script>
+
+<style scoped>
+    img {
+        max-width: 400px;
+    }
+</style>
+```
+
+30. Edit `[dashid].vue` as follows:
+
+```html
+<template>
+    <div>
+        <DashboardDetails :dashboard="dashboard"/>
+    </div>
+</template>
+```
