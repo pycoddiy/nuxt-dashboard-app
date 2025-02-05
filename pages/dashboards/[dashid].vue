@@ -10,7 +10,7 @@
     const { dashid } = useRoute().params;
 
     const uri = 'https://fakestoreapi.com/products/' + dashid;
-    const { data: dashboard } = await useFetch(uri);
+    const { data: dashboard } = await useFetch(uri, { key: dashid });
 
     definePageMeta({
         layout: 'footer-navbar'
