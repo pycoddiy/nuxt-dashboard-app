@@ -62,4 +62,93 @@ const { dashid } = useRoute().params;
     })
 ```
 
-16. 
+# Styling the appp with Tailwind
+16. In the terminal install Tailwind `npm install --save-dev @nuxtjs/tailwindcss`. Run `npx tailwindcss init`. Add to `next.config.ts` the Tailwind module:
+
+```ts
+export default defineNuxtConfig({
+  compatibilityDate: '2024-11-01',
+  devtools: { enabled: true },
+  modules: ['@nuxtjs/tailwindcss']
+})
+```
+
+17. In the `default.vue` layout edit header and div sections by additng `class=""` in respective markup to style Home and About pages. Refer to [Tailwind Cheat Sheet](https://nerdcave.com/tailwind-cheat-sheet).
+
+**NOTE:** If you ever run into `ERROR: System limit for number of file watchers reached in Nuxt`, increase the number of watchers using these commands
+
+```bash
+echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+```
+
+18. Create `assets/css` directory and add new file `tailwind.css`. Edit this file:
+
+```css
+@tailwind base;
+@tailwind components; 
+@tailwind utilities; 
+
+@layer base {
+    h1 {
+        @apply font-bold;
+    }
+}
+```
+
+19. Add to `assets` the `images` directory and place `logo.png` file.
+
+20. Edit `default.vue` and `footer-navbar.vue` layouts so that they look prettier, e.g. like this:
+
+### Default.vue
+```html
+template>
+    <div>
+        <header class="m-4 shadow-lg bg-blue-50 rounded-lg">
+            <nav class="container p-2 flex justify-between">
+                <NuxtLink to="/"><img class="rounded-full w-10" src="assets/images/logo.png" alt="Dashboard logo"> </NuxtLink>
+                <ul class="flex gap-4">
+                <li><NuxtLink to="/">Home</NuxtLink></li>
+                <li><NuxtLink to="/about">About</NuxtLink></li>
+                <li><NuxtLink  to="/dashboards">Dashboards</NuxtLink></li>
+            </ul>
+        </nav>
+        </header>
+        <div class="m-4 shadow-lg bg-red-50 p-4 rounded-lg">
+            <slot />
+        </div>
+    </div>
+</template>
+
+<style scoped>
+    .router-link-exact-active {
+        font-weight: bolder;
+    }
+</style>
+```
+
+### Footer-navbar.vue
+```html
+<template>
+    <div class="m-4 shadow-lg bg-red-50 p-4 rounded-lg">
+        <slot />
+    </div>
+    <footer class="m-4 shadow-lg bg-blue-50 rounded-lg">
+
+        <nav class="container p-2 flex justify-between">
+            <NuxtLink to="/"><img class="rounded-full w-10" src="assets/images/logo.png" alt="Dashboard logo"></NuxtLink>
+            <ul class="flex gap-4">
+                <li><NuxtLink to="/">Home</NuxtLink></li>
+                <li><NuxtLink to="/about">About</NuxtLink></li>
+                <li><NuxtLink  to="/dashboards">Dashboards</NuxtLink></li>
+            </ul>
+        </nav>
+    </footer>
+</template>
+
+<style scoped>
+    .router-link-exact-active {
+        color: brown;
+    }
+</style>
+```
+
