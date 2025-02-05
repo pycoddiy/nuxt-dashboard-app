@@ -152,3 +152,20 @@ template>
 </style>
 ```
 
+## Styling buttons
+21. Continue editing `tailwind.css` by adding the following section:
+
+```css
+@layer components {
+    .btn {
+        @apply bg-indigo-500 text-indigo-100 px-3 py-2 rounded-md text-sm transition-colors duration-150 hover:bg-indigo-800 focus:outline
+    }
+}
+```
+
+22. Apply respective `btn` class to `NuxtLink` elements in the `default.vue` and `footer-navbar.vue`
+
+```html
+<li><NuxtLink to="/" class="btn">Home</NuxtLink></li>
+```
+
