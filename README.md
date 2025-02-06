@@ -413,3 +413,42 @@ app: {
     <span>Add to Cart</span>
 </button>
 ```
+
+## Routing sensitive data via servers
+39. Create nested directory `./server/api` where all API routes will live. In this directory we create the script `ninja.js`, which will contain the following code:
+
+```js
+export default defineEventHandler( async (event) => {
+
+    const { name } = getQuery(event)
+
+    const { age } = await readBody(event)
+
+    return {
+       message: `Hello, ${name}. You are ${age} years old.`
+    };
+});
+```
+
+40. In the `about.vue` page, add the following script:
+
+```ts
+<template>
+    <div>
+        <h1>About</h1>
+        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Explicabo maiores adipisci quis, dolor consequatur quae? Delectus asperiores, nobis molestias dolor iusto tenetur culpa illo exercitationem dolores blanditiis natus, fuga dicta?</p>
+        <div>{{ data }}</div>
+    </div>
+</template>
+
+<script setup>
+    useHead({
+        title: 'Nuxt Dashboar App | About'
+    });
+
+    const { data } = await useFetch('api/ninja?name=mario', {
+        method: 'post',
+        body: { age: 30 }
+    });
+</script>
+```
